@@ -16,18 +16,23 @@ public class RandomizedQueue<Item> implements Iterable<Item>
 	private int N;
 	
 	private class Array implements Iterator<Item> {
+		private Item[] d;
 		private int n;
 		public Array () {
 			n = N;
+			d = (Item[]) new Object[n];
+			for (int i = 0; i < n; i++) d[i] = data[i];
 		}
 		public boolean hasNext() {
 			return n!=0;
 		}
 		public Item next() {
-			return data[n];
+			int i = StdRandom.uniform(n);
+			Item item = data[i];
+			data[i] = data[--n];
+			return item;
 		}
-	}
-	
+	}	
 	
 	/**
 	 * construct an empty randomized queue 
@@ -83,6 +88,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
 		int i = StdRandom.uniform(N);
 		Item item = data[i];
 		data[i] = data[--N];
+		if (N == data.length/4) resize(data.length/2);
 		return item;
 	}
 	

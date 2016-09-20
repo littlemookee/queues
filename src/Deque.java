@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 /**
  * @author 			mikhail
  * created 			19.09.2016
@@ -7,7 +5,7 @@ import java.util.Iterator;
  * @param <Item>
  */
 
-import java.util.*;
+import java.util.Iterator;
 
 public class Deque<Item> implements Iterable<Item>
 {
@@ -114,7 +112,7 @@ public class Deque<Item> implements Iterable<Item>
 		Item item = last.item;
 		last = last.next;
 		last.prev = null;
-		return null;
+		return item;
 	}
 	
 	/**
