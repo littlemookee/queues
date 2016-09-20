@@ -1,9 +1,13 @@
+import java.util.Iterator;
+
 /**
  * @author 			mikhail
  * created 			19.09.2016
  * last modified	19.09.2016
  * @param <Item>
  */
+
+import java.util.*;
 
 public class Deque<Item> implements Iterable<Item>
 {
@@ -14,21 +18,22 @@ public class Deque<Item> implements Iterable<Item>
 		public Item item;
 		public Node prev, next;
 		public Node() {
-			item = prev = next = null;
+			item = null; 
+			prev = next = null;
 		}
 	}
 	
 	private class List implements Iterator<Item> {
 		private Node cur;
 		private List() {
-			cur = first
+			cur = first;
 		}
-		Item next(){
+		public Item next(){
 			Item item = cur.item;
 			cur = cur.next;
 			return item;
 		}
-		boolean hasNext() {
+		public boolean hasNext() {
 			return cur != null;
 		}
 	}
@@ -125,7 +130,6 @@ public class Deque<Item> implements Iterable<Item>
 	 * @param args
 	 */
 	public static void main(String[] args)
-	{		
-		
+	{
 	}
 }
