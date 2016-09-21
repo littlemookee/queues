@@ -27,11 +27,17 @@ public class RandomizedQueue<Item> implements Iterable<Item>
 			return n!=0;
 		}
 		public Item next() {
+			if (n == 0)
+				throw new java.util.NoSuchElementException();			
 			int i = StdRandom.uniform(n);
-			Item item = data[i];
-			data[i] = data[--n];
+			Item item = d[i];
+			d[i] = d[--n];
 			return item;
 		}
+		public void remove()
+		{
+			throw new java.lang.UnsupportedOperationException();
+		}		
 	}	
 	
 	/**
@@ -67,6 +73,9 @@ public class RandomizedQueue<Item> implements Iterable<Item>
 	 */
 	public void enqueue(Item item)
 	{
+		if (item == null)
+			throw new java.lang.NullPointerException();
+		
 		if (data.length == N) resize(2*N);
 		data[N++] = item;
 	}
@@ -85,6 +94,9 @@ public class RandomizedQueue<Item> implements Iterable<Item>
 	 */
 	public Item dequeue()
 	{
+		if (N == 0)
+			throw new java.util.NoSuchElementException();
+		
 		int i = StdRandom.uniform(N);
 		Item item = data[i];
 		data[i] = data[--N];
@@ -97,7 +109,10 @@ public class RandomizedQueue<Item> implements Iterable<Item>
 	 * @return
 	 */
 	public Item sample()
-	{	
+	{
+		if (N == 0)
+			throw new java.util.NoSuchElementException();
+		
 		int i = StdRandom.uniform(N);
 		Item item = data[i];
 		return item;
@@ -116,6 +131,19 @@ public class RandomizedQueue<Item> implements Iterable<Item>
 	 * @param args
 	 */
 	public static void main(String[] args)
-	{		
+	{
+		RandomizedQueue<Integer> rq = new RandomizedQueue<Integer>();
+		
+		for (int i = 0; i < 10; i++)
+			rq.enqueue(i);
+		
+		for (int i : rq)
+			StdOut.println(i);
+		
+		StdOut.println();
+		
+		for (int i : rq)
+			StdOut.println(i);
+		
 	}
 }
